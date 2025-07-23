@@ -57,7 +57,31 @@ class LottoViewController: UIViewController {
         return dividerLineView
         
     }()
-
+    
+    private let selectedNumberLabel: UILabel = {
+        let selectedNumberLabel = UILabel()
+        selectedNumberLabel.font = .systemFont(ofSize: 24, weight: .medium)
+        selectedNumberLabel.textColor = .systemYellow
+        selectedNumberLabel.text = "913회"
+        return selectedNumberLabel
+    }()
+    
+    private let resultTextLabel: UILabel = {
+        let resultTextLabel = UILabel()
+        resultTextLabel.font = .systemFont(ofSize: 24, weight: .medium)
+        resultTextLabel.textColor = .black
+        resultTextLabel.text = "당첨결과"
+        return resultTextLabel
+    }()
+    
+    private let resultStackView: UIStackView = {
+        let resultStackView = UIStackView()
+        resultStackView.axis = .horizontal
+        resultStackView.spacing = 4
+        resultStackView.alignment = .center
+        return resultStackView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,7 +94,7 @@ class LottoViewController: UIViewController {
         configureView()
         
     }
-
+    
 }
 
 extension LottoViewController: ViewDesignProtocol {
@@ -80,6 +104,11 @@ extension LottoViewController: ViewDesignProtocol {
         view.addSubview(infoLabel)
         view.addSubview(dateLabel)
         view.addSubview(dividerLineView)
+        
+        resultStackView.addArrangedSubview(selectedNumberLabel)
+        resultStackView.addArrangedSubview(resultTextLabel)
+        view.addSubview(resultStackView)
+        
     }
     
     func configureView() {
@@ -110,6 +139,12 @@ extension LottoViewController: ViewDesignProtocol {
             make.horizontalEdges.equalTo(drawNumberTextField)
             make.height.equalTo(0.2)
         }
+        
+        resultStackView.snp.makeConstraints { make in
+            make.top.equalTo(dividerLineView.snp.bottom).offset(24)
+            make.centerX.equalToSuperview()
+        }
+        
     }
     
 }
@@ -131,6 +166,7 @@ extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let selectedNumber = drawNumbers[row]
         drawNumberTextField.text = "\(selectedNumber)"
+        selectedNumberLabel.text = "\(selectedNumber)회"
         view.endEditing(true)
     }
     

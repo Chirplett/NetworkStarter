@@ -41,6 +41,15 @@ class LottoViewController: UIViewController {
         infoLabel.textColor = .black
         return infoLabel
     }()
+    
+    private let dateLabel: UILabel = {
+        let dateLabel = UILabel()
+        dateLabel.text = "2025-05-30 추첨"
+        dateLabel.font = .systemFont(ofSize: 12, weight: .regular)
+        dateLabel.textColor = .gray
+        return dateLabel
+        
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +71,7 @@ extension LottoViewController: ViewDesignProtocol {
     func configureHierarchy() {
         view.addSubview(drawNumberTextField)
         view.addSubview(infoLabel)
+        view.addSubview(dateLabel)
     }
     
     func configureView() {
@@ -80,6 +90,11 @@ extension LottoViewController: ViewDesignProtocol {
         infoLabel.snp.makeConstraints { make in
             make.top.equalTo(drawNumberTextField.snp.bottom).offset(24)
             make.leading.equalTo(drawNumberTextField.snp.leading)
+        }
+        
+        dateLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(infoLabel)
+            make.trailing.equalTo(drawNumberTextField.snp.trailing)
         }
     }
     

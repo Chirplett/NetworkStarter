@@ -50,6 +50,13 @@ class LottoViewController: UIViewController {
         return dateLabel
         
     }()
+    
+    private let dividerLineView: UIView = {
+        let dividerLineView = UIView()
+        dividerLineView.backgroundColor = .gray
+        return dividerLineView
+        
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +79,7 @@ extension LottoViewController: ViewDesignProtocol {
         view.addSubview(drawNumberTextField)
         view.addSubview(infoLabel)
         view.addSubview(dateLabel)
+        view.addSubview(dividerLineView)
     }
     
     func configureView() {
@@ -95,6 +103,12 @@ extension LottoViewController: ViewDesignProtocol {
         dateLabel.snp.makeConstraints { make in
             make.centerY.equalTo(infoLabel)
             make.trailing.equalTo(drawNumberTextField.snp.trailing)
+        }
+        
+        dividerLineView.snp.makeConstraints { make in
+            make.top.equalTo(infoLabel.snp.bottom).offset(14)
+            make.horizontalEdges.equalTo(drawNumberTextField)
+            make.height.equalTo(0.2)
         }
     }
     

@@ -33,6 +33,14 @@ class LottoViewController: UIViewController {
         }
         return numbers
     }()
+    
+    private let infoLabel: UILabel = {
+        let infoLabel = UILabel()
+        infoLabel.text = "당첨번호 안내"
+        infoLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        infoLabel.textColor = .black
+        return infoLabel
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +61,7 @@ extension LottoViewController: ViewDesignProtocol {
     
     func configureHierarchy() {
         view.addSubview(drawNumberTextField)
+        view.addSubview(infoLabel)
     }
     
     func configureView() {
@@ -66,6 +75,11 @@ extension LottoViewController: ViewDesignProtocol {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(32)
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.height.equalTo(44)
+        }
+        
+        infoLabel.snp.makeConstraints { make in
+            make.top.equalTo(drawNumberTextField.snp.bottom).offset(24)
+            make.leading.equalTo(drawNumberTextField.snp.leading)
         }
     }
     
